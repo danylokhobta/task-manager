@@ -1,6 +1,6 @@
 # Task Manager App
 
-A full-stack task manager app to help users keep track of their tasks, organized by categories, due dates, and priority. This app allows users to create, update, and delete tasks, set deadlines, and prioritize tasks, all with a clean and intuitive interface.
+This full-stack application is designed to showcase my skills in both front-end and back-end development. The app demonstrates my ability to create and manage RESTful APIs on the back-end while seamlessly integrating them with the front-end. Additionally, it highlights my UX/UI design skills, featuring a clean, modern design for an intuitive user experience.
 
 ## Features
 
