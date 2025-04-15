@@ -1,0 +1,39 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap');
+@import "tailwindcss";
+
+/* Opt-in the whole page to interpolate sizes to/from keywords */
+:root {
+  interpolate-size: allow-keywords; /* 👈 */
+}
+
+/* Apply to the entire page */
+*::-webkit-scrollbar {
+  width: 8px; /* Width of the scrollbar */
+  height: 8px; /* Height for horizontal scrollbar */
+}
+
+/* Style the thumb (draggable part) */
+*::-webkit-scrollbar-thumb {
+  background-color: var(--color-gray-100);
+  border-radius: 0;
+  cursor: grab;
+  height: 40%; /* Sets thumb height to 80% */
+  max-height: 40%; /* Ensures it doesn't shrink too much */
+}
+
+/* Hover effect for the thumb */
+*::-webkit-scrollbar-thumb:hover {
+  background-color: var(--color-gray-200);
+}
+
+/* Style the track (background part of the scrollbar) */
+*::-webkit-scrollbar-track {
+  background: white;
+  border-radius: 0;
+}
+
+body {
+  font-family: "Roboto Condensed", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
