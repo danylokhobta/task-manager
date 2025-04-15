@@ -36,11 +36,24 @@ const corsOptions = {
   credentials: true, // Allow cookies to be sent with requests
 };
 
+// Middleware Setup
+app.use(express.json());
+app.use(cors(corsOptions)); // Apply CORS middleware globally
+app.use(cookieParser());
+
+// Swagger API Documentation
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+
+// Routes
+app.use('/auth', authRoutes);
+app.use('/user', userRoutes);
+app.use('/tasks', taskRoutes);
+
 // Set middleware of CORS 
 app.use((req, res, next) => {
   res.setHeader(
     "Access-Control-Allow-Origin",
-    "https://your-frontend.com"
+    ...allowedOrigins
   );
   res.setHeader(
     "Access-Control-Allow-Methods",
@@ -57,19 +70,6 @@ app.use((req, res, next) => {
 
   next();
 });
-
-// Middleware Setup
-app.use(express.json());
-app.use(cors(corsOptions)); // Apply CORS middleware globally
-app.use(cookieParser());
-
-// Swagger API Documentation
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
-
-// Routes
-app.use('/auth', authRoutes);
-app.use('/user', userRoutes);
-app.use('/tasks', taskRoutes);
 
 app.use(errorMiddleware);
 
