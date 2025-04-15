@@ -11,13 +11,8 @@ const useGlobal = () => {
   const authSlice = useSelector((state: RootState) => state.global);
 
   useEffect(() => {
-    if (!authSlice.accessToken) {
-      return; // No access token available, skipping user fetch.
-    }
-  
     const fetchUser = async () => {
       try {
-        // 🔐 Додатковий захист
         if (authSlice.accessToken === null) return;
   
         const response = await getUserByToken(authSlice.accessToken);

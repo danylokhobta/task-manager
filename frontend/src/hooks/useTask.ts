@@ -29,7 +29,7 @@ const useTask = () => {
       }
     };
     handleFetchTasks();
-  }, []);
+  }, [isAuthenticated]);
 
   const handleCreateTask = async ({ title = '', description = '', is_done = false }: CreateTaskRequest) => {
     try {
