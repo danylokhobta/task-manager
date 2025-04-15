@@ -3,6 +3,7 @@ import { setAccessToken } from "../store/authSlice";
 import { store } from "../store";
 import { refreshAccessToken } from "./auth";
 import handleError from "../utils/errorHandlerUtil";
+import { setLoading, setLoaded } from "../store/globalStore";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -24,6 +25,7 @@ const api = axios.create({
 // Request interceptor: Adds the access token to headers
 api.interceptors.request.use(
   (config) => {
+    setLoading();
     const token = store.getState().global.accessToken;
     config._retryWithNewToken = true;
     if (token) {
@@ -42,7 +44,10 @@ api.interceptors.request.use(
 
 // Response interceptor: Handles token refresh logic
 api.interceptors.response.use(
-  (response) => response, // Success case: just return the response
+  (response) => {
+    setLoaded();
+    return response;
+  }, // Success case: just return the response
   async (error) => {
     const originalRequest = error.config;
     
@@ -63,6 +68,7 @@ api.interceptors.response.use(
             error,
             logout: true,
           })
+          setLoaded();
           return Promise.reject();
         }
 
@@ -75,6 +81,7 @@ api.interceptors.response.use(
           error,
           logout: true,
         })
+        setLoaded();
         return Promise.reject();
       }
     }
@@ -85,6 +92,7 @@ api.interceptors.response.use(
       error,
       logout: true,
     })
+    setLoaded();
     return Promise.reject();
   }
 );

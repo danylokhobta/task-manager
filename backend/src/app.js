@@ -21,6 +21,7 @@ const allowedOrigins = [
   'http://localhost:5000', // Development backend
   'http://localhost:5173', // Development frontend
   'https://task-manager-spn5.onrender.com', // Production frontend
+  'https://backend-dg9f.onrender.com',
 ];
 
 const corsOptions = {

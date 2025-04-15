@@ -1,4 +1,4 @@
-# Task Manager App v.0.0.1
+# Task Manager App
 
 A full-stack task manager app to help users keep track of their tasks, organized by categories, due dates, and priority. This app allows users to create, update, and delete tasks, set deadlines, and prioritize tasks, all with a clean and intuitive interface.
 

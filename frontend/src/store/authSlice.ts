@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { AccessToken } from "types/user";
 
 // Function to get the entire state from localStorage or return default initial state
-const getInitialState = (): GlobalState => {
+const getInitialState = (): AuthState => {
   const storedState = localStorage.getItem('glocalState');
   return storedState ? JSON.parse(storedState) : {
     accessToken: null,
@@ -10,12 +10,12 @@ const getInitialState = (): GlobalState => {
   };
 };
 
-interface GlobalState {
+interface AuthState {
   accessToken: AccessToken;
   isAuthenticated: boolean;
 }
 
-const initialState: GlobalState = getInitialState();
+const initialState: AuthState = getInitialState();
 
 const authSlice = createSlice({
   name: "global",
@@ -25,7 +25,7 @@ const authSlice = createSlice({
       state.accessToken = action.payload;
       localStorage.setItem('glocalState', JSON.stringify(state));
     },
-    setIsAuthenticated(state, action: PayloadAction<GlobalState['isAuthenticated']>) {
+    setIsAuthenticated(state, action: PayloadAction<AuthState['isAuthenticated']>) {
       state.isAuthenticated = action.payload;
       console.log("isAuth is: ", action.payload);
       localStorage.setItem('glocalState', JSON.stringify(state));

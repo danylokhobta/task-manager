@@ -13,7 +13,7 @@ function App() {
   const { isAuthenticated } = useGlobal();
 
   return (
-    <div className="pl-5 pr-2 pt-5 box-border flex flex-col gap-5 h-screen max-w-xl mx-auto">
+    <div className="relative pl-5 pr-2 pt-5 box-border flex flex-col gap-5 h-screen max-w-xl mx-auto">
       <Toast />
       <Routes>
         <Route path="/" element={isAuthenticated ? <Navigate to="/user" /> : <WelcomePage />} />

@@ -17,7 +17,10 @@ export const handleApiCall = async <T>(
 ): Promise<ApiResponse<T>> => {
   try {
     const response = await apiCall; // Execute API call
-    return { success: true, data: response.data }; // Standardized success response
+    if(response?.data) {
+      return { success: true, data: response.data }; // Standardized success response
+    }
+    return { success: false };
   } catch (error: any) {
     console.error("API Error:", error);
 

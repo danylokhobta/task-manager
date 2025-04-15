@@ -4,6 +4,7 @@ import useTask from "../hooks/useTask";
 import { logout } from "../utils/authUtils";
 import { deleteUser } from "../utils/userUtils";
 import { useForm } from "../hooks/useForm";
+import Loader from "./Loader";
 
 // fixed bottom-5 left-5 right-5
 
@@ -22,6 +23,7 @@ const Navbar = () => {
     <nav className="absolute bottom-5 self-center backdrop-blur-sm mr-3">
       <div className="absolute top-0 bottom-0 left-0 right-0 z-10 bg-black opacity-10"></div>
       <div className="relative p-2.5 z-20 flex justify-center gap-2.5">
+        <Loader />
         {isLoginPage && (
           <>
             <Button label="Back" link="/" />
