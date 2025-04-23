@@ -24,8 +24,8 @@ export const handleApiCall = async <T>(
   } catch (error: any) {
     console.error("API Error:", error);
 
-    const message = error.response?.data?.message || "An unexpected error occurred";
-    const status = error.response?.status || 500;
+    const message = error?.response?.data?.message || "An unexpected error occurred";
+    const status = error?.response?.status || 500;
 
     return { success: false, message, status }; // Standardized error response
   }

@@ -4,7 +4,7 @@ import { Task, CreateTaskRequest, UpdateTaskRequest } from "types/tasks";
 
 // Fetch all tasks
 export const fetchTasks = async (): Promise<Task[]> => {
-  const response = await handleApiCall(api.get<Task[]>("/tasks"));
+  const response = await handleApiCall(api.get<Task[]>("/task"));
   if (response.success) {
     return response.data || []; // Return empty array if no tasks are found
   } else {
@@ -14,7 +14,7 @@ export const fetchTasks = async (): Promise<Task[]> => {
 
 // Create a new task
 export const createTask = async (taskData: CreateTaskRequest): Promise<Task | null> => {
-  const response = await handleApiCall(api.post("/tasks", taskData));
+  const response = await handleApiCall(api.post("/task", taskData));
   if (response.success) {
     return response.data || null; // Return null if creation failed unexpectedly
   } else {
@@ -24,7 +24,7 @@ export const createTask = async (taskData: CreateTaskRequest): Promise<Task | nu
 
 // Update an existing task
 export const updateTask = async (taskId: number, taskData: UpdateTaskRequest): Promise<Task | null> => {
-  const response = await handleApiCall(api.put(`/tasks/${taskId}`, taskData));
+  const response = await handleApiCall(api.put(`/task/${taskId}`, taskData));
   if (response.success) {
     return response.data || null; // Return null if update failed unexpectedly
   } else {
@@ -34,7 +34,7 @@ export const updateTask = async (taskId: number, taskData: UpdateTaskRequest): P
 
 // Delete a task
 export const deleteTask = async (taskId: number): Promise<boolean> => {
-  const response = await handleApiCall(api.delete(`/tasks/${taskId}`));
+  const response = await handleApiCall(api.delete(`/task/${taskId}`));
   if (response.success) {
     return true; // Successfully deleted the task
   } else {

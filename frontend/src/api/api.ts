@@ -89,8 +89,7 @@ api.interceptors.response.use(
     // In case of any other error, just reject the request with the error
     handleError({
       message: error.response.data.message,
-      error,
-      logout: true,
+      error
     })
     setLoaded();
     return Promise.reject();

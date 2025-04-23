@@ -9,7 +9,7 @@ import { ToastType } from "../store/toastStore";
 
 export const login = async ({ email, password }: GetUserRequest): Promise<boolean> => {
   const response = await getUser({ email, password });
-  if (response && response.accessToken) {
+  if (response && response.accessToken && response !== null) {
     store.dispatch(setUser(response.user));
     store.dispatch(setAccessToken(response.accessToken));
     store.dispatch(setIsAuthenticated(true));
