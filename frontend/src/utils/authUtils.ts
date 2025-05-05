@@ -1,6 +1,6 @@
 import { store } from "../store";
 import { signin, signup } from "../api/auth";
-import { setUser, removeUser } from "../store/userSlice";
+import { removeUser } from "../store/userSlice";
 import { setAccessToken, setIsAuthenticated, resetCookie } from "../store/authSlice";
 import { GetUserRequest, CreateUserRequest } from "../types/user";
 import { showToast } from "../hooks/useToast";
