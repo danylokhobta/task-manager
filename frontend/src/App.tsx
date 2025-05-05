@@ -4,7 +4,7 @@ import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import UserPage from "./pages/UserPage";
 import TasksPage from "./pages/TasksPage";
-import EditTaskPage from "./pages/EditTaskPage";
+// import EditTaskPage from "./pages/EditTaskPage";
 import useGlobal from "./hooks/useGlobal";
 import Navbar from "./components/Navbar";
 import Toast from "./components/Toast";
@@ -21,7 +21,7 @@ function App() {
         <Route path="/register" element={isAuthenticated ? <Navigate to="/tasks" /> : <RegisterPage />} />
         <Route path="/user" element={isAuthenticated ? <UserPage /> : <Navigate to="/" />} />
         <Route path="/tasks" element={isAuthenticated ? <TasksPage /> : <Navigate to="/" />} />
-        <Route path="/tasks/:taskId/edit" element={isAuthenticated ? <EditTaskPage /> : <Navigate to="/" />} />
+        {/* <Route path="/tasks/:taskId/edit" element={isAuthenticated ? <EditTaskPage /> : <Navigate to="/" />} /> */}
         <Route path="/*" element={<Navigate to="/" />} />
       </Routes>
       <Navbar />
