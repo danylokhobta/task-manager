@@ -1,7 +1,7 @@
 import axios from "axios";
 import { setAccessToken } from "../store/authSlice";
 import { store } from "../store";
-import { refreshAccessToken } from "./auth";
+import { refreshToken } from "./auth";
 import handleError from "../utils/errorHandlerUtil";
 import { setLoading, setLoaded } from "../store/globalStore";
 
@@ -60,7 +60,7 @@ api.interceptors.response.use(
       originalRequest._retryWithNewToken = false; // Ensure there is no loop
       // Try refreshing the access token with the refresh token
       try {
-        const newAccessToken = await refreshAccessToken(); // Make the refresh token request
+        const newAccessToken = await refreshToken(); // Make the refresh token request
 
         if (newAccessToken === null) {
           handleError({

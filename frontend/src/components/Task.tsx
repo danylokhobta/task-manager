@@ -10,7 +10,7 @@ const Task = ({
   task: TaskType;
   focus: boolean;
 }) => {
-  const { handleDeleteTask, handleUpdateTask } = useTask();
+  const { handleDeleteTask, deleteLocalTask, handleUpdateTask, uploadTask } = useTask();
   const titleArea = useRef<HTMLTextAreaElement>(null);
   const descArea = useRef<HTMLTextAreaElement>(null);
   const [isFocused, setIsFocused] = useState(false);
@@ -24,9 +24,17 @@ const Task = ({
     }
   
     if (newTitle === "" && newDescription === "") {
-      handleDeleteTask(task.id);
+      if (task.userId) {
+        handleDeleteTask(task.id);
+      } else {
+        deleteLocalTask(task.id);
+      }
     } else if (task.title !== newTitle || task.description !== newDescription) {
-      handleUpdateTask(task.id!, { title: newTitle, description: newDescription });
+      if (task.userId) {
+        handleUpdateTask(task.id!, { title: newTitle, description: newDescription });
+      } else {
+        uploadTask({ title: newTitle, description: newDescription, id: task.id });
+      }
     }
   
     setIsFocused(false); // Set isFocused to false if the blur is leaving the task
@@ -59,18 +67,18 @@ const Task = ({
 
   return (
     <div className={`Task my-1.5 bg-gray-100 hover:bg-gray-200 ${(isFocused || isFocused) && "bg-gray-200"}`}>
-      <div className={`relative p-2.5 flex items-start gap-2.5 ${task.is_done ? "opacity-40" : ""}`}>
+      <div className={`relative p-2.5 flex items-start gap-2.5 ${task.isDone ? "opacity-40" : ""}`}>
 
         {/* CHECKBOX */}
-        <div onClick={() =>handleUpdateTask(task.id!, { is_done: !task.is_done })} className="w-5 h-5 mt-0.5 flex-shrink-0">
-          <div className={`w-full h-full border-2 cursor-pointer ${task.is_done ? "bg-black" : ""}`}/>
+        <div onClick={() => handleUpdateTask(task.id, { isDone: !task.isDone })} className="w-5 h-5 mt-0.5 flex-shrink-0">
+          <div className={`w-full h-full border-2 cursor-pointer ${task.isDone ? "bg-black" : ""}`}/>
         </div>
 
         {/* TASK TITLE AND DESCRIPTION */}
-        <div className={`flex flex-col grow overflow-hidden ${task.is_done ? "opacity-40" : ""}`}>
+        <div className={`flex flex-col grow overflow-hidden ${task.isDone ? "opacity-40" : ""}`}>
 
           <div
-            className={`text-2xl font-bold leading-[26px] text-ellipsis overflow-hidden line-clamp-3 ${task.is_done && "line-through"} ${isFocused && "hidden"}`}
+            className={`text-2xl font-bold leading-[26px] text-ellipsis overflow-hidden line-clamp-3 ${task.isDone && "line-through"} ${isFocused && "hidden"}`}
             onClick={() => handleFocus("title")}
           >
             {newTitle || "Click to add a title..."}

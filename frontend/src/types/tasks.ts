@@ -5,26 +5,28 @@ export type Done = boolean | undefined;
 export type TaskSortOrder = "" | "asc" | "desc";
 
 export interface Task {
+  title: string;
+  description: string;
+  isDone: boolean;
+  createdAt: string;
   id: number;
-  user_id: number;
-  title: Title;
-  description: Description;
-  is_done: Done;
-  created_at: string;
-  updated_at?: string;
+
+  userId?: number;
+  updatedA?: string;
 }
 
 // Request Types
 export interface CreateTaskRequest {
-  title: Title;
-  description: Description;
-  is_done: Done;
+  title?: string;
+  description?: string;
+  isDone?: boolean;
+  id?: number
 }
 
 export interface UpdateTaskRequest {
-  title?: Title;
-  description?: Description;
-  is_done?: Done;
+  title?: string;
+  description?: string;
+  isDone?: boolean;
 }
 
 // Response Types

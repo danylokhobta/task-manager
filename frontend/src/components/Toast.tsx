@@ -1,5 +1,5 @@
 import { Snackbar, Fade } from "@mui/material";
-import useToast from "../store/toastStore"; // Zustand toast store
+import useToast from "../hooks/useToast"; // Zustand toast store
 
 const Toast = () => {
   const { message, type, open, hideToast } = useToast();

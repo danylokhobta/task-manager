@@ -16,9 +16,9 @@ function App() {
     <div className="relative pl-5 pr-2 pt-5 box-border flex flex-col gap-5 h-screen max-w-xl mx-auto">
       <Toast />
       <Routes>
-        <Route path="/" element={isAuthenticated ? <Navigate to="/user" /> : <WelcomePage />} />
-        <Route path="/login" element={isAuthenticated ? <Navigate to="/user" /> : <LoginPage />} />
-        <Route path="/register" element={isAuthenticated ? <Navigate to="/user" /> : <RegisterPage />} />
+        <Route path="/" element={isAuthenticated ? <Navigate to="/tasks" /> : <WelcomePage />} />
+        <Route path="/login" element={isAuthenticated ? <Navigate to="/tasks" /> : <LoginPage />} />
+        <Route path="/register" element={isAuthenticated ? <Navigate to="/tasks" /> : <RegisterPage />} />
         <Route path="/user" element={isAuthenticated ? <UserPage /> : <Navigate to="/" />} />
         <Route path="/tasks" element={isAuthenticated ? <TasksPage /> : <Navigate to="/" />} />
         <Route path="/tasks/:taskId/edit" element={isAuthenticated ? <EditTaskPage /> : <Navigate to="/" />} />

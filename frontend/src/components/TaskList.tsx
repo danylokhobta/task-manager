@@ -12,35 +12,28 @@ type TaskListProps = {
   focusNewTaskInList?: boolean;
 };
 
-const TaskList = ({
-  collapsable,
-  initCollapse,
-  done,
-  undone,
-  focusNewTaskInList = false,
-}: TaskListProps) => {
-  const { tasks, sort, isTaskInitCompleted } = useTask();
+const TaskList = ({ collapsable, initCollapse, done, undone, focusNewTaskInList = false }: TaskListProps) => {
+  const { tasks, sort, isTaskInitCompleted, fetchTaskList } = useTask();
 
   const processedTasks = useMemo(() => {
     // Step 1: Sort the tasks based on the sort order
     const sorted = [...tasks].sort((a, b) => {
       if (sort === "asc") {
-        return new Date(a.created_at).getTime() - new Date(b.created_at).getTime();
+        return new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime();
       } else if (sort === "desc") {
-        return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
+        return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
       }
       return 0; // Return unsorted if sort is ""
     });
   
     // Step 2: Filter the sorted tasks based on the done/undone flags
     return sorted.filter(task => 
-      (done && task.is_done) ||
-      (undone && !task.is_done) ||
+      (done && task.isDone) ||
+      (undone && !task.isDone) ||
       (!done && !undone)
     );
   }, [tasks, sort, done, undone]);
   
-    
   const [isCollapsed, setisCollapsed] = useState(initCollapse);
   const [prevTasks, setPrevTasks] = useState<TaskType[] | null>(null);
   const [newItem, setNewItem] = useState<TaskType | null>(null);
@@ -59,6 +52,10 @@ const TaskList = ({
       setPrevTasks(processedTasks);
     }
   }, [processedTasks]);
+
+  useEffect(() => {
+    fetchTaskList();
+  }, [])
 
   return (
     <div>

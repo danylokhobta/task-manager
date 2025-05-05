@@ -1,51 +1,80 @@
-import { Injectable } from '@nestjs/common';
-import { TaskModel } from './task.model';
-import { CustomError } from '@/utils';
+import {
+  Injectable,
+  ForbiddenException,
+  NotFoundException,
+} from '@nestjs/common';
+import { PrismaService } from '../prisma';
+import { Task } from '@prisma/client';
+import { createTaskDto, updateTaskDto } from './dto';
 
 @Injectable()
 export class TaskService {
-  constructor(private TaskModel: TaskModel) {}
+  constructor(private prisma: PrismaService) {}
 
-  async getTasksService(userId: number) {
-    const tasks = await this.TaskModel.getTasksModel(userId);
+  async getTasksService(userId: number): Promise<Task[]> {
+    const tasks = await this.prisma.task.findMany({
+      where: { userId },
+    });
     return tasks;
   }
 
-  async createTaskService(data: { userId: number, title: string, description: string}) {
-    const newTask = await this.TaskModel.createTaskModel(data);
-    return newTask;
+  async createTaskService(userId: number, dto: createTaskDto) {
+    return await this.prisma.task.create({
+      data: {
+        userId,
+        title: dto.title,
+        description: dto.description,
+        isDone: dto.isDone, // default to false if undefined
+      },
+    });
   }
 
-  async updateTaskService(
-    {taskId, userId, title, description, is_done}: 
-    {taskId: string, userId: number, title: string, description: string, is_done: boolean}
-  ) {
-    const task = await this.TaskModel.getTaskModel(taskId);
-    if (!task) {
-      throw new CustomError("Task not found", 404);
-    }
-    if (task.user_id !== userId) {
-      throw new CustomError("Unauthorized to update this task", 403);
-    }
-  
-    // Use existing data if not provided
-    const updatedTitle = title !== undefined ? title : task.title;
-    const updatedDescription = description !== undefined ? description : task.description;
-    const updatedIsDone = is_done !== undefined ? is_done : task.is_done;
-  
-    const updatedTask = await this.TaskModel.updateTaskModel({taskId, userId, title: updatedTitle, description: updatedDescription, is_done: updatedIsDone});
-    return updatedTask;
-  };
+  async updateTaskService(userId: number, taskId: string, dto: updateTaskDto) {
+    const taskIdNum = parseInt(taskId, 10);
+    const task = await this.prisma.task.findUnique({
+      where: {
+        id: taskIdNum,
+      },
+    });
 
-  async deleteTaskService(taskId: string, userId:number) {
-    const task = await this.TaskModel.getTaskModel(taskId);
     if (!task) {
-      throw new CustomError("Task not found", 404);
+      throw new NotFoundException('Task not found');
     }
-    if (task.user_id !== userId) {
-      throw new CustomError("Unauthorized to delete this task",403);
+    if (task.userId !== userId) {
+      throw new ForbiddenException('Unauthorized to update this task');
     }
-    
-    await this.TaskModel.deleteTaskModel(taskId);
+
+    await this.prisma.task.update({
+      where: { id: taskIdNum },
+      data: {
+        title: dto.title,
+        description: dto.description,
+        isDone: dto.isDone,
+      },
+    });
+
+    return;
+  }
+
+  async deleteTaskService(taskId: string, userId: number) {
+    const taskIdNum = parseInt(taskId, 10);
+    const task = await this.prisma.task.findUnique({
+      where: {
+        id: taskIdNum,
+      },
+    });
+
+    if (!task) {
+      throw new NotFoundException('Task not found');
+    }
+    if (task.userId !== userId) {
+      throw new ForbiddenException('Unauthorized to update this task');
+    }
+
+    await this.prisma.task.delete({
+      where: { id: taskIdNum },
+    });
+
+    return;
   }
 }

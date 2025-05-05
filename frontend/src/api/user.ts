@@ -1,46 +1,14 @@
 import { handleApiCall } from "./apiCallHandler";
 import api from "./api";
 import { 
-  GetUserRequest, 
-  CreateUserRequest, 
-  CreateUserResponse, 
   GetUserResponse, 
   UpdateUserRequest,
-  UpdateUserResponse,
-  AccessToken
 } from "types/user";
 import handleError from "../utils/errorHandlerUtil";
 
-// Create a new user
-export const createUser = async (userData: CreateUserRequest): Promise<CreateUserResponse | null> => {
-  const response = await handleApiCall(api.post("/user/create", userData));
-  if (response.success) {
-    console.log("User created successfully:", response.data);
-    return response.data || null;
-  } else {
-    handleError({
-      message: `Error creating user: ${response.message}
-    `})
-    return null;
-  }
-};
-
-// Get user (login)
-export const getUser = async (credentials: GetUserRequest): Promise<GetUserResponse | null> => {
-  const response = await handleApiCall(api.post("/user/get", credentials));
-  if (response.success) {
-    return response.data || null;
-  } else {
-    handleError({
-      message: `Error getting user: ${response.message}
-    `})
-    return null;
-  }
-};
-
 // Get user by token (refetch)
-export const getUserByToken = async (accessToken: AccessToken): Promise<GetUserResponse | null> => {
-  const response = await handleApiCall(api.post("/user/getByToken", { accessToken }));
+export const getMe = async (): Promise<GetUserResponse | null> => {
+  const response = await handleApiCall(api.get("/user/me"));
   if (response.success) {
     return response.data;
   } else {
@@ -49,22 +17,22 @@ export const getUserByToken = async (accessToken: AccessToken): Promise<GetUserR
 };
 
 // Update user details
-export const updateUser = async (userData: UpdateUserRequest): Promise<UpdateUserResponse | null> => {
-  const response = await handleApiCall(api.put("/user", userData));
+export const updateUser = async (userData: UpdateUserRequest): Promise<boolean> => {
+  const response = await handleApiCall(api.put("/user/update", userData));
   if (response.success) {
-    console.log("User updated successfully:", response.data);
-    return response.data || null;
+    console.log("User updated successfully:", response);
+    return true;
   } else {
     handleError({
       message: `Error updating user: ${response.message}
     `})
-    return null;
+    return false;
   }
 };
 
 // Delete user account
-export const deleteUser = async (): Promise<boolean> => {
-  const response = await handleApiCall(api.delete("/user"));
+export const deleteUser = async (): Promise<boolean | null> => {
+  const response = await handleApiCall(api.delete("/user/delete"));
   if (response.success) {
     console.log("User deleted successfully");
     return true;
@@ -72,6 +40,6 @@ export const deleteUser = async (): Promise<boolean> => {
     handleError({
       message: `Error deleting user: ${response.message}
     `})
-    return false;
+    return null;
   }
 };

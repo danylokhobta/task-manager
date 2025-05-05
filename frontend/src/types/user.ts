@@ -4,14 +4,11 @@ export type Password = string | undefined;
 export type Name = string | undefined;
 export type Message = string | undefined;
 export type Success = boolean;
-export type Id = number | undefined;
 
 export interface User {
-  id: Id;
   email: Email;
   name: Name;
 }
-
 
 // Request Types
 export interface CreateUserRequest {
@@ -27,10 +24,7 @@ export interface GetUserRequest {
 
 export interface UpdateUserRequest {
   email: Email;
-  password: {
-    new: string,
-    old: string,
-  };
+  password: string,
   name: Name;
 }
 
@@ -38,12 +32,13 @@ export interface UpdateUserRequest {
 // Response Types
 export interface CreateUserResponse {
   user: User;
-  accessToken: AccessToken;
+  access_token: AccessToken;
 }
 
 export interface GetUserResponse {
-  user: User;
-  accessToken: AccessToken;
+  email: string;
+  name: string;
+  access_token: AccessToken;
 }
 
 export interface UpdateUserResponse {

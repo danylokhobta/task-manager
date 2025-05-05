@@ -1,4 +1,4 @@
-import { showToast } from "../store/toastStore";
+import { showToast } from "../hooks/useToast";
 import { logout as logoutUtil } from "./authUtils";
 
 type handleErrorInterface = {

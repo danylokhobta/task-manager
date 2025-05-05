@@ -1,7 +1,7 @@
 import { updateUser as apiUpdateUser, deleteUser as apiDeleteUser } from "../api/user"; // Import the function
 import { UpdateUserRequest } from "../types/user";
 import { logout } from "./authUtils";
-import { showToast } from "../store/toastStore";
+import { showToast } from "../hooks/useToast";
 
 // Function to handle user update
 export const updateUser = async (userData: UpdateUserRequest): Promise<boolean> => {

@@ -10,7 +10,7 @@ import Loader from "./Loader";
 
 const Navbar = () => {
   const location = useLocation();
-  const { handleCreateTask } = useTask();
+  const { createLocalTask } = useTask();
   const { submitForm } = useForm();
 
   const isWelcomePage = matchPath("/", location.pathname);
@@ -50,7 +50,7 @@ const Navbar = () => {
             <div className="w-0.5 bg-gray-300" />
             <Button 
               label="Add new task" 
-              onClick={() => handleCreateTask({ title: "", description: "", is_done: false })} 
+              onClick={() => createLocalTask()} 
             />
           </>
         )}

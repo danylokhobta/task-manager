@@ -4,7 +4,7 @@ import { Task, CreateTaskRequest, UpdateTaskRequest } from "types/tasks";
 
 // Fetch all tasks
 export const fetchTasks = async (): Promise<Task[]> => {
-  const response = await handleApiCall(api.get<Task[]>("/task"));
+  const response = await handleApiCall(api.get<Task[]>("/task/all"));
   if (response.success) {
     return response.data || []; // Return empty array if no tasks are found
   } else {
@@ -14,7 +14,7 @@ export const fetchTasks = async (): Promise<Task[]> => {
 
 // Create a new task
 export const createTask = async (taskData: CreateTaskRequest): Promise<Task | null> => {
-  const response = await handleApiCall(api.post("/task", taskData));
+  const response = await handleApiCall(api.post("/task/create", taskData));
   if (response.success) {
     return response.data || null; // Return null if creation failed unexpectedly
   } else {

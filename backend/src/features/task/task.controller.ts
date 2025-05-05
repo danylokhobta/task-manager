@@ -1,37 +1,54 @@
-import { Controller, Get, Post, Put, Delete, Param, Body, UseGuards, Req } from '@nestjs/common';
-import { AuthGuard } from '../auth/auth.guard';
+import {
+  Controller,
+  Get,
+  Post,
+  Put,
+  Delete,
+  Param,
+  Body,
+  UseGuards,
+  HttpCode,
+  HttpStatus,
+} from '@nestjs/common';
 import { TaskService } from './task.service';
-import { Request } from 'express';
+import { JwtGuard } from '../auth/guard';
+import { GetUser } from '../user/decorator';
+import { createTaskDto, updateTaskDto } from './dto';
 
+@UseGuards(JwtGuard)
 @Controller('task')
 export class TaskController {
-  constructor(private readonly TaskService: TaskService) {}
+  constructor(private TaskService: TaskService) {}
 
-  @Get()
-  @UseGuards(AuthGuard)
-  async getTasks(@Req() req: Request) {
-    const userId = req.user.id;
+  @HttpCode(HttpStatus.OK)
+  @Get('all')
+  async getTasks(@GetUser('id') userId: number) {
     return this.TaskService.getTasksService(userId);
   }
 
-  @Post()
-  @UseGuards(AuthGuard)
-  async createTask(@Req() req: Request, @Body() body: { title: string, description: string, is_done: boolean }) {
-    const userId = req.user.id;
-    return this.TaskService.createTaskService({ userId, ...body });
+  @HttpCode(HttpStatus.CREATED)
+  @Post('create')
+  async createTask(@GetUser('id') userId: number, @Body() dto: createTaskDto) {
+    return await this.TaskService.createTaskService(userId, dto);
   }
 
+  @HttpCode(HttpStatus.OK)
   @Put(':taskId')
-  @UseGuards(AuthGuard)
-  async updateTask(@Param('taskId') taskId: string, @Req() req: Request, @Body() body: { title: string, description: string, is_done: boolean }) {
-    const userId = req.user.id;
-    return this.TaskService.updateTaskService({ taskId, userId, ...body });
+  async updateTask(
+    @Param('taskId') taskId: string,
+    @GetUser('id') userId: number,
+    @Body() dto: updateTaskDto,
+  ) {
+    return await this.TaskService.updateTaskService(userId, taskId, dto);
   }
 
+  @HttpCode(HttpStatus.NO_CONTENT)
   @Delete(':taskId')
-  @UseGuards(AuthGuard)
-  async deleteTask(@Param('taskId') taskId: string, @Req() req: Request) {
-    const userId = req.user.id;
-    return this.TaskService.deleteTaskService(taskId, userId);
+  async deleteTask(
+    @Param('taskId') taskId: string,
+    @GetUser('id') userId: number,
+  ) {
+    await this.TaskService.deleteTaskService(taskId, userId);
+    return;
   }
 }

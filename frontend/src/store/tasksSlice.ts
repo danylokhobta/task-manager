@@ -20,8 +20,13 @@ const tasksSlice = createSlice({
     },
     updateTask(state, action) {
       const index = state.tasks.findIndex((task) => task.id === action.payload.id);
+      console.log(index)
       if (index !== -1) {
-        state.tasks[index] = action.payload;
+        console.log(action.payload)
+        state.tasks[index] = {
+          ...state.tasks[index],
+          ...action.payload,
+        };
       }
     },
     deleteTask(state, action) {

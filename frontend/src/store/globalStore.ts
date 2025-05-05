@@ -2,7 +2,7 @@ import { create } from "zustand";
 
 export type ToastType = "success" | "error" | "warning" | "info";
 
-type GlobalState = {
+type globalState = {
   isLoaded: boolean;
   setLoading: (timeoutMs: number) => void;
   setLoaded: () => void;
@@ -10,7 +10,7 @@ type GlobalState = {
 
 let timeoutId: NodeJS.Timeout | null = null; // Store the timeout ID
 
-export const useToast = create<GlobalState>((set) => ({
+export const globalStore = create<globalState>((set) => ({
   isLoaded: true,
 
   setLoading: (timeoutMs = 500) => {
@@ -41,11 +41,11 @@ export const useToast = create<GlobalState>((set) => ({
 
 // Export standalone functions
 export const setLoading = (timeoutMs = 500) => {
-  useToast.getState().setLoading(timeoutMs);
+  globalStore.getState().setLoading(timeoutMs);
 };
 // Export standalone functions
 export const setLoaded = () => {
-  useToast.getState().setLoaded();
+  globalStore.getState().setLoaded();
 };
 
-export default useToast;
+export default globalStore;

@@ -1,30 +1,33 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { User } from "types/user";
 
-const initialState: User = {
-  id: undefined,
-  email: undefined,
-  name: undefined,
+const initialState = {
+  isUserLoaded: false as boolean | null,
+  user: {} as User | null,
 };
 
 const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
+    setUserIsLoading(state) {
+      state.isUserLoaded = null;
+    },
     setUser(state, action: PayloadAction<User>) {
-      state.id = action.payload.id;
-      state.email = action.payload.email;
-      state.name = action.payload.name;
+      state.user = {
+        ...action.payload,
+        ...state.user
+      }
+      state.isUserLoaded = true;
       localStorage.setItem('userState', JSON.stringify(state));
     },
     removeUser(state) {
-      state.id = undefined;
-      state.email = undefined;
-      state.name = undefined;
+      state.user = null;
+      state.isUserLoaded = false;
       localStorage.setItem('userState', JSON.stringify(state));
     },
   },
 });
 
-export const { setUser, removeUser } = userSlice.actions;
+export const { setUser, removeUser, setUserIsLoading } = userSlice.actions;
 export default userSlice.reducer;
