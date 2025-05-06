@@ -26,7 +26,8 @@ const api = axios.create({
 api.interceptors.request.use(
   (config) => {
     setLoading();
-    const token = store.getState().global.accessToken;
+    const token = store.getState().auth.accessToken;
+    console.log("The token", token)
     config._retryWithNewToken = true;
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;

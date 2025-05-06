@@ -1,7 +1,7 @@
+import { useState, useEffect, useMemo } from "react";
 import useTask from "../hooks/useTask";
 import Task from "../components/Task";
 import { Collapse } from "@mui/material";
-import { useState, useEffect, useMemo } from "react";
 import { Task as TaskType } from "../types/tasks";
 
 type TaskListProps = {
@@ -13,7 +13,7 @@ type TaskListProps = {
 };
 
 const TaskList = ({ collapsable, initCollapse, done, undone, focusNewTaskInList = false }: TaskListProps) => {
-  const { tasks, sort, isTaskInitCompleted, fetchTaskList } = useTask();
+  const { tasks, sort, isTaskInitCompleted } = useTask();
 
   const processedTasks = useMemo(() => {
     // Step 1: Sort the tasks based on the sort order
@@ -52,10 +52,6 @@ const TaskList = ({ collapsable, initCollapse, done, undone, focusNewTaskInList 
       setPrevTasks(processedTasks);
     }
   }, [processedTasks]);
-
-  useEffect(() => {
-    fetchTaskList();
-  }, [])
 
   return (
     <div>

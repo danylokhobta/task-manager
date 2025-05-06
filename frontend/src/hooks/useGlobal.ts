@@ -4,7 +4,7 @@ import { resetCookie } from "../store/authSlice";
 
 const useGlobal = () => {
   const dispatch = useDispatch();
-  const authSlice = useSelector((state: RootState) => state.global);
+  const authSlice = useSelector((state: RootState) => state.auth);
 
   return {
     ...authSlice,

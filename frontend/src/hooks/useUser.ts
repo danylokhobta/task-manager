@@ -8,7 +8,7 @@ import { getMe } from "../api/user";
 const useUser = () => {
   const dispatch = useDispatch();
   const userState = useSelector((state: RootState) => state.user);
-  const authSlice = useSelector((state: RootState) => state.global);
+  const authSlice = useSelector((state: RootState) => state.auth);
 
   const fetchUser = async () => {
     setUserIsLoading();

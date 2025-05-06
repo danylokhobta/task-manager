@@ -13,7 +13,6 @@ import api from "./api";
 export const signup = async (userData: CreateUserRequest): Promise<CreateUserResponse | null> => {
   const response = await handleApiCall(api.post("/auth/signup", userData));
   if (response.success) {
-    console.log("User created successfully:", response.data);
     return response.data || null;
   } else {
     handleError({

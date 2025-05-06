@@ -4,7 +4,7 @@ import { Task, CreateTaskRequest, UpdateTaskRequest } from "types/tasks";
 
 // Fetch all tasks
 export const fetchTasks = async (): Promise<Task[]> => {
-  const response = await handleApiCall(api.get<Task[]>("/task/all"));
+  const response = await handleApiCall(api.get("/task/all"));
   if (response.success) {
     return response.data || []; // Return empty array if no tasks are found
   } else {
