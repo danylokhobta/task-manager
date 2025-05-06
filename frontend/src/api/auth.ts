@@ -7,6 +7,7 @@ import {
   GetUserResponse,
 } from "types/user";
 import api from "./api";
+import plainApi from "./plainApi";
 
 
 // Create a new user
@@ -40,7 +41,7 @@ export const signin = async (credentials: GetUserRequest): Promise<GetUserRespon
  * @returns A new access token or null if the refresh fails.
  */
 export const refreshToken = async (): Promise<string | null> => {
-  const response = await handleApiCall(api.post("/auth/refresh-token"));
+  const response = await handleApiCall(plainApi.post("/auth/refresh-token"));
   if (response.success) {
     return response.data.access_token;
   } else {
