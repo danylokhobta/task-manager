@@ -1,38 +1,31 @@
 import { handleApiCall } from "./apiCallHandler";
-import handleError from "../utils/errorHandlerUtil";
 import { 
   GetUserRequest, 
   CreateUserRequest, 
-  CreateUserResponse, 
-  GetUserResponse,
 } from "types/user";
 import api from "./api";
-import plainApi from "./plainApi";
+import axios from "axios";
 
 
 // Create a new user
-export const signup = async (userData: CreateUserRequest): Promise<CreateUserResponse | null> => {
-  const response = await handleApiCall(api.post("/auth/signup", userData));
-  if (response.success) {
-    return response.data || null;
-  } else {
-    handleError({
-      message: `Error creating user: ${response.message}
-    `})
-    return null;
+export const signup = async (userData: CreateUserRequest) => {
+  try {
+    const response = await handleApiCall(api.post("/auth/signup", userData));
+    sessionStorage.setItem("access_token", response.data.access_token);
+    return response.data.access_token;
+  } catch (err) {
+    throw err;
   }
 };
 
 // Get user (signin)
-export const signin = async (credentials: GetUserRequest): Promise<GetUserResponse | null> => {
-  const response = await handleApiCall(api.post("/auth/signin", credentials));
-  if (response.success) {
-    return response.data || null;
-  } else {
-    handleError({
-      message: `Error getting user: ${response.message}
-    `})
-    return null;
+export const signin = async (credentials: GetUserRequest) => {
+  try {
+    const response = await handleApiCall(api.post("/auth/signin", credentials));
+    sessionStorage.setItem("access_token", response.data.access_token);
+    return response.data.access_token;
+  } catch (err) {
+    throw err;
   }
 };
 
@@ -40,11 +33,10 @@ export const signin = async (credentials: GetUserRequest): Promise<GetUserRespon
  * Refreshes the access token using the refresh token stored in cookies.
  * @returns A new access token or null if the refresh fails.
  */
-export const refreshToken = async (): Promise<string | null> => {
-  const response = await handleApiCall(plainApi.post("/auth/refresh-token"));
-  if (response.success) {
-    return response.data.access_token;
-  } else {
-    return null;
-  }
+
+// Function to refresh token
+export const refreshToken = async () => {
+  const response = await axios.post("https://your-api.com/auth/refresh");
+  sessionStorage.setItem("access_token", response.data.access_token);
+  return response.data.access_token;
 };

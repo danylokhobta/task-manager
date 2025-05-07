@@ -1,17 +1,14 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { AccessToken } from "types/user";
 
 // Function to get the entire state from localStorage or return default initial state
 const getInitialState = (): AuthState => {
   const storedState = localStorage.getItem('authState');
   return storedState ? JSON.parse(storedState) : {
-    accessToken: null,
     isAuthenticated: false,
   };
 };
 
 interface AuthState {
-  accessToken: AccessToken;
   isAuthenticated: boolean;
 }
 
@@ -21,10 +18,6 @@ const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    setAccessToken(state, action: PayloadAction<AccessToken>) {
-      state.accessToken = action.payload;
-      localStorage.setItem('authState', JSON.stringify(state));
-    },
     setIsAuthenticated(state, action: PayloadAction<AuthState['isAuthenticated']>) {
       state.isAuthenticated = action.payload;
       localStorage.setItem('authState', JSON.stringify(state));
@@ -35,5 +28,5 @@ const authSlice = createSlice({
   },
 });
 
-export const { setAccessToken, setIsAuthenticated, resetCookie } = authSlice.actions;
+export const { setIsAuthenticated, resetCookie } = authSlice.actions;
 export default authSlice.reducer;
