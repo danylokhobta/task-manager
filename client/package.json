@@ -1,0 +1,42 @@
+{
+  "name": "task-manager",
+  "version": "0.2.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
+    "@hookform/resolvers": "^5.0.1",
+    "@mui/material": "^7.1.0",
+    "@reduxjs/toolkit": "^2.8.1",
+    "@tailwindcss/vite": "^4.1.5",
+    "axios": "^1.9.0",
+    "next": "15.3.2",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-hook-form": "^7.56.3",
+    "react-redux": "^9.2.0",
+    "react-textarea-autosize": "^8.5.9",
+    "redux": "^5.0.1",
+    "zod": "^3.24.4",
+    "zustand": "^5.0.4"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3",
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "autoprefixer": "^10.4.21",
+    "eslint": "^9",
+    "eslint-config-next": "15.3.2",
+    "postcss": "^8.5.3",
+    "tailwindcss": "^4.1.5",
+    "typescript": "^5"
+  }
+}

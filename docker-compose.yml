@@ -1,7 +1,7 @@
 # docker-compose.yml
 services:
   frontend:
-    build: ./frontend
+    build: ./client
     ports:
       - "3000:3000"
     depends_on:

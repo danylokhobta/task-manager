@@ -25,8 +25,7 @@ Deployment: Render.com
 Demo
 https://task-manager-spn5.onrender.com/
 
-## Version 0.1.0 Features
+## Version 0.2.0 Features
 
-- Added Nestjs and Prisma frameworks
-- Restructured backend code and made it much more readable
-- Made frontend a little bit more stable, thought there're a lot of things to do...
+- Added Nextjs
+- Restructured frontend code and made it much more readable
