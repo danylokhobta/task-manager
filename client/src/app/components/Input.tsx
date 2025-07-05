@@ -33,7 +33,9 @@ const Input = ({ value, blured, placeholder, setValue, inputFormProps, error }: 
           value={value}
           onChange={(e) => {
             inputFormProps?.onChange(e); // Trigger react-hook-form onChange
-            setValue && setValue(e.target.value); // Trigger custom onChange
+            if (setValue) {
+              setValue(e.target.value);
+            } // Trigger custom onChange
           }}
           onFocus={() => setIsFocused(true)}
           onBlur={(e) => {
@@ -66,7 +68,9 @@ const Input = ({ value, blured, placeholder, setValue, inputFormProps, error }: 
         value={value}
         onChange={(e) => {
           inputFormProps?.onChange(e); // Trigger react-hook-form onChange
-          setValue && setValue(e.target.value); // Trigger custom onChange
+          if (setValue) {
+            setValue(e.target.value);
+          } // Trigger custom onChange
         }}
         onBlur={(e) => inputFormProps?.onBlur?.(e)} // Trigger react-hook-form onBlur
         className="w-full p-2.5 outline-0 bg-gray-100 text-2xl font-bold placeholder:font-normal focus:bg-gray-200"
