@@ -1,5 +1,5 @@
 const API_CONFIG = {
-  BASE_URL: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000',
+  BASE_URL: process.env.NEXT_PUBLIC_API_URL,
   ENDPOINTS: {
     USER: '/user',
     TASK: '/task',
