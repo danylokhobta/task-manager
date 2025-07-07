@@ -14,5 +14,8 @@ ENV JWT_REFRESH_SECRET=$JWT_REFRESH_SECRET
 
 RUN npm install
 RUN npm run build
+
+ENV PORT=5000
 EXPOSE 5000
+
 CMD ["npm", "run", "start:prod"]
