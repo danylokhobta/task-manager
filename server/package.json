@@ -21,7 +21,7 @@
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/main",
 
-    "build": "nest build",
+    "build": "prisma migrate dev && nest build",
     
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",

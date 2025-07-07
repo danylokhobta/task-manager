@@ -11,10 +11,9 @@ async function bootstrap() {
   app.enableCors({
     origin: [
       'http://localhost:3000',
+      'https://task-manager-xrli.onrender.com',
       'http://localhost:5000',
       'http://localhost:5173',
-      'https://task-manager-spn5.onrender.com',
-      'https://backend-dg9f.onrender.com',
     ],
     credentials: true,
   });
