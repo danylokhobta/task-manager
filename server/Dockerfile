@@ -1,7 +1,7 @@
-# backend/Dockerfile
-FROM node:20
+FROM node:20-alpine
 WORKDIR /app
 COPY . .
 RUN npm install
-CMD ["npm", "start"]
+RUN npm run build
 EXPOSE 5000
+CMD ["npm", "run", "start:prod"]

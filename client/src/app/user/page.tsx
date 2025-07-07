@@ -1,9 +1,9 @@
 'use client';
 import { useState, useRef, useEffect } from "react";
-import useUser from "@hooks/useUser";
-import PageContainer from "@components/PageContainer";
-import Input from "@components/Input";
-import useForm from "@hooks/useForm";
+import useUser from "@/hooks/useUser";
+import PageContainer from "@/app/components/PageContainer";
+import Input from "@/app/components/Input";
+import useForm from "@/hooks/useForm";
 import { useForm as useFormFramework } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";

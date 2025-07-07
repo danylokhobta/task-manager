@@ -3,7 +3,7 @@ import {
   userSchema,
   UserDTO,
   UserUpdateDTO,
-} from "@schemas/user";
+} from "@/schemas/user";
 import API_CONFIG from "./config";
 
 // Get user by token (refetch)

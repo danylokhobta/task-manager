@@ -1,22 +1,9 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-
-import ReduxProvider from "@providers/ReduxProvider";
-import Toast from "@components/Toast";
-import Navbar from "@components/Navbar";
+import ReduxProvider from "@/providers/ReduxProvider";
+import Toast from "@/app/components/Toast";
+import Navbar from "@/app/components/Navbar";
 import GlobalStatusMonitor from "@/utils/GlobalStatusMonitor";
-
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 export const metadata: Metadata = {
   title: "Task Manager | Version 0.2.0",
@@ -31,7 +18,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`relative pl-5 pr-2 pt-5 box-border flex flex-col gap-5 h-screen max-w-xl mx-auto ${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`relative pl-5 pr-2 pt-5 box-border flex flex-col gap-5 h-screen max-w-xl mx-auto antialiased`}
       >
         <ReduxProvider>
           <Toast />

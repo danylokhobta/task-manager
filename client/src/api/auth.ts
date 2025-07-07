@@ -7,7 +7,7 @@ import {
 
   SigninRequestDTO,
   signinResponseSchema
-} from "@schemas/auth";
+} from "@/schemas/auth";
 
 // Create a new user (signup)
 export const signup = async (userData: SignupRequestDTO) => {

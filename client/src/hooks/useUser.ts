@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../store";
 import { userActions } from "../store/userSlice";
 import { UserDTO } from "@/schemas/user";
-import { getMe, updateUser, deleteUser } from "@utils/userUtils";
+import { getMe, updateUser, deleteUser } from "@/utils/userUtils";
 
 const useUser = () => {
   const dispatch = useDispatch();

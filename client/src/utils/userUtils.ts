@@ -1,9 +1,9 @@
 'use client';
 import { getMe as getMeAPI, updateUser as apiUpdateUser, deleteUser as apiDeleteUser } from "../api/user";
-import { UserUpdateDTO } from "@schemas/user";
+import { UserUpdateDTO } from "@/schemas/user";
 import { store } from "@/store";
 import { userActions } from "@/store/userSlice";
-import { resetCookies } from "@utils/authUtils";
+import { resetCookies } from "@/utils/authUtils";
 
 // Function to handle user update
 export const getMe = async () => {
@@ -14,6 +14,7 @@ export const getMe = async () => {
   } catch(err) {
     store.dispatch(userActions.setError(`Error fetching user: ${err}`));
     console.error("Error fetching user", err);
+    throw err;
   }
 };
 
@@ -26,6 +27,7 @@ export const updateUser = async (userData: UserUpdateDTO) => {
   } catch(err) {
     store.dispatch(userActions.setError(`Error updating user: ${err}`));
     console.error("Error updating user", err);
+    throw err;
   }
 };
 
@@ -38,5 +40,6 @@ export const deleteUser = async () => {
   } catch(err) {
     store.dispatch(userActions.setError(`Error deleting user: ${err}`));
     console.error("Error deleting user", err);
+    throw err;
   }
 };

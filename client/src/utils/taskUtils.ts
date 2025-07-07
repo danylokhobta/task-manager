@@ -18,6 +18,7 @@ export const getAllTasks = async () => {
     store.dispatch(taskActions.setTasks(tasks));
   } catch (err) {
     store.dispatch(taskActions.setError(`Error fetching tasks: ${err}`));
+    throw err;
   }
 };
 
@@ -28,6 +29,7 @@ export const updateTask = async (taskId: number, updatedTask: Partial<TaskDTO>) 
     store.dispatch(taskActions.updateTask(response));
   } catch (err) {
     store.dispatch(taskActions.setError(`Error updating task: ${err}`));
+    throw err;
   }
 };
 
@@ -56,6 +58,7 @@ export const uploadLocalTask = async (data: TaskUploadDTO) => {
     store.dispatch(taskActions.addTask(response));
   } catch (err) {
     store.dispatch(taskActions.setError(`Error creating task: ${err}`));
+    throw err;
   }
 };
 
@@ -70,5 +73,6 @@ export const deleteTask = async (taskId: number) => {
     deleteLocalTask(taskId);
   } catch (err) {
     store.dispatch(taskActions.setError(`Error deleting task: ${err}`));
+    throw err;
   }
 };

@@ -25,7 +25,7 @@ async function bootstrap() {
   const config = new DocumentBuilder()
     .setTitle('Task Manager API')
     .setDescription('API docs')
-    .setVersion('1.0')
+    .setVersion('0.2.0')
     .addBearerAuth()
     .build();
   const document = SwaggerModule.createDocument(app, config);
@@ -33,7 +33,7 @@ async function bootstrap() {
 
   // Start server
   const PORT = process.env.PORT || 5000;
-  await app.listen(PORT);
+  await app.listen(PORT, '0.0.0.0');
 }
 
 bootstrap().catch((err) => {

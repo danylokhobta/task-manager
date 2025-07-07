@@ -1,7 +1,7 @@
 'use client';
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../store";
-import { setGlobalStatus } from "@store/globalSlice";
+import { setGlobalStatus } from "@/store/globalSlice";
 import { LoadStatus } from "@/schemas/global";
 
 const useGlobal = () => {

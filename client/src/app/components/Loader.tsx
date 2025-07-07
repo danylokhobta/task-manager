@@ -1,4 +1,4 @@
-import useGlobal from '@hooks/useGlobal';
+import useGlobal from '@/hooks/useGlobal';
 
 export default function Loader() {
   const { globalStatus } = useGlobal();

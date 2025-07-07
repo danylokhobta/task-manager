@@ -2,10 +2,10 @@
 import { useEffect, useState, useRef } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm as useFormFramework } from "react-hook-form";
-import PageContainer from "@components/PageContainer";
-import useAuth from '@hooks/useAuth'
-import useForm from "@hooks/useForm";
-import Input from "@components/Input";
+import PageContainer from "@/app/components/PageContainer";
+import useAuth from '@/hooks/useAuth'
+import useForm from "@/hooks/useForm";
+import Input from "@/app/components/Input";
 import { signinRequestSchema, SigninRequestDTO } from "@/schemas/auth";
 
 export default function SigninPage() {

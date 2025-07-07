@@ -1,7 +1,7 @@
 'use client';
 import { store } from "../store";
 import { signin as signinAPI, signup as signupAPI } from "../api/auth";
-import { userActions } from "@store/userSlice";
+import { userActions } from "@/store/userSlice";
 import { SigninRequestDTO, SignupRequestDTO } from "@/schemas/auth";
 import { setError } from "@/store/authSlice";
 
@@ -13,6 +13,7 @@ export const signin = async ({ email, password }: SigninRequestDTO) => {
   } catch(err) {
     store.dispatch(setError(`Error signing in: ${err}`));
     console.error("Error signing in:", err);
+    throw err;
   }
 };
 
@@ -24,6 +25,7 @@ export const signup = async ({ email, password, name }: SignupRequestDTO) => {
   } catch(err) {
     store.dispatch(setError(`Error signing up: ${err}`));
     console.error("Error signing up:", err);
+    throw err;
   }
 };
 

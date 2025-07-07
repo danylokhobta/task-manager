@@ -1,8 +1,8 @@
 'use client';
 import { useEffect } from "react";
-import PageContainer from "@components/PageContainer";
-import TaskList from "@components/TaskList";
-import useTask from "@hooks/useTask";
+import PageContainer from "@/app/components/PageContainer";
+import TaskList from "@/app/components/TaskList";
+import useTask from "@/hooks/useTask";
 
 const TasksPage = () => {
   const { tasks, status, getAllTasks } = useTask();

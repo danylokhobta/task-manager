@@ -1,10 +1,10 @@
 'use client';
 import { usePathname } from 'next/navigation';
 import Button from "./Button";
-import useTask from "@hooks/useTask";
-import useAuth from "@hooks/useAuth";
-import useUser from '@hooks/useUser';
-import useForm from "@hooks/useForm";
+import useTask from "@/hooks/useTask";
+import useAuth from "@/hooks/useAuth";
+import useUser from '@/hooks/useUser';
+import useForm from "@/hooks/useForm";
 import Loader from "./Loader";
 
 // fixed bottom-5 left-5 right-5

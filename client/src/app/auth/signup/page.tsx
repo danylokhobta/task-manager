@@ -2,11 +2,11 @@
 import { useEffect, useState, useRef } from "react";
 import { useForm as useFormFramework } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import useAuth from '@hooks/useAuth';
-import useForm from "@hooks/useForm";
-import PageContainer from "@components/PageContainer";
-import Input from "@components/Input";
-import { SignupRequestDTO, signupRequestSchema } from "@schemas/auth";
+import useAuth from '@/hooks/useAuth';
+import useForm from "@/hooks/useForm";
+import PageContainer from "@/app/components/PageContainer";
+import Input from "@/app/components/Input";
+import { SignupRequestDTO, signupRequestSchema } from "@/schemas/auth";
 
 export default function SignupPage() {
   const [email, setEmail] = useState("");

@@ -2,7 +2,7 @@
 import { useRouter } from 'next/navigation';
 import { useSelector } from "react-redux";
 import { RootState } from "../store";
-import { signin, signout, signup } from "@utils/authUtils";
+import { signin, signout, signup } from "@/utils/authUtils";
 import { SigninRequestDTO, SignupRequestDTO } from "@/schemas/auth";
 
 const useGlobal = () => {
